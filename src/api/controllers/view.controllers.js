@@ -1,10 +1,10 @@
 import * as Products from '../models/product.models.js';
 
-export const viewList = async(req, res) => {
+export const viewList = async(req, res, next) => {
 
     try{
 
-        const respuestaProductos = await Products.selectAllProducts(); // llamo a la funcion que trae todos los productos
+        const respuestaProductos = await Products.selectAllProducts(true);
 
         res.render("index", {
             tittle: "Listado de productos",
@@ -12,7 +12,7 @@ export const viewList = async(req, res) => {
         });
 
     } catch (error) {
-        console.log(error);
+        next(error);
     }
 };
 

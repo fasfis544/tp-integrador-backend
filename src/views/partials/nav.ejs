@@ -1,11 +1,8 @@
-<div class="sidebar">
-    <h2>Sportswear <br> Dashboard</h2>
-    <ul>
-        <li><a href="/dashboard">TRAER</a></li>
-        <li><a href="/dashboard/consultar">TRAER POR ID</a></li>
-        <li><a href="/dashboard/crear">CREAR</a></li>
-        <li><a href="/dashboard/actualizar">MODIFICAR</a></li>
-        <li><a href="/dashboard/eliminar">ELIMINAR</a></li>
-        <li><a href="/api/productos">API</a></li>
-    </ul>
-</div>
+<aside class="sidebar">
+    <div class="sidebar-heading"><span class="eyebrow">WORKSPACE</span><h2>Administración<span class="demo-badge">DEMO</span></h2><p>Tu catálogo, bajo control.</p></div>
+    <nav aria-label="Panel de administración"><ul>
+        <% const links = [['/dashboard', '01', 'Catálogo'], ['/dashboard/consultar', '02', 'Consultar producto'], ['/dashboard/crear', '03', 'Crear producto'], ['/dashboard/actualizar', '04', 'Modificar producto'], ['/dashboard/eliminar', '05', 'Eliminar producto']]; %>
+        <% links.forEach(([href, number, label]) => { %><li><a href="<%= href %>" <%- currentPath === href ? 'aria-current="page"' : '' %>><span><%= number %></span><%= label %><span class="nav-arrow" aria-hidden="true">↗</span></a></li><% }) %>
+    </ul></nav>
+    <div class="sidebar-bottom"><a href="/tienda">← Volver a la tienda</a><a href="/api/productos">Ver API JSON ↗</a><p>Entorno académico sin autenticación. No usar con datos sensibles.</p></div>
+</aside>

@@ -1,119 +1,12 @@
-<%- include('partials/head') %> 
+<%- include('partials/head') %>
 <div class="wrapper">
     <%- include('partials/nav') %>
-    <main id="contenedor-get">
-        <div id="getProduct-container" class="crudForm-container">
-            <h2><%= tittle %></h2>
-
-            <form id="getProduct-form">
-                <label for="idProd">Id producto</label>
-                <input type="number" name="idProd" id="idProd" required>
-
-                <input type="submit" value="borrar producto">
-            </form>
-        </div>
-
-        <div id="getId-container">
-            <ul id="getId-list">
-            </ul>
-        </div>
-
-        <div id="updateForm-container"></div>
+    <main class="dashboard-main" id="contenido" data-action="eliminar">
+        <div class="dashboard-heading"><div><span class="eyebrow">GESTIÓN DEL CATÁLOGO / BAJA</span><h1>Eliminar producto</h1><p>Buscá el producto y confirmá su eliminación.</p></div><a href="/dashboard" class="text-link">← Volver al catálogo</a></div>
+        <div class="warning-note"><strong>Esta acción es permanente.</strong> Si solo querés ocultar el producto, podés marcarlo como inactivo desde Modificar.</div>
+        <%- include('partials/product-lookup') %>
+        <div id="producto-detalle"></div>
     </main>
-</body>
-<script>
-    let getId_lista = document.getElementById("getId-list");
-    let getProduct_form = document.getElementById("getProduct-form");
-    let updateForm = document.getElementById("updateForm-container");
-
-    getProduct_form.addEventListener("submit", async(e) => {
-        e.preventDefault(); // evita que el formulario se envíe de forma tradicional
-
-        try {
-            getId_lista.innerHTML = `<p class="loading">Cargando...</p>`;
-
-            let formData = new FormData(e.target);
-
-            let data = Object.fromEntries(formData.entries());
-
-            let idProd = data.idProd.trim(); //trim() elimina espacios en blanco al inicio y al final
-            console.log("ID del producto a eliminar:", idProd);
-
-            let response = await fetch(`http://localhost:3000/api/productos/${idProd}`);
-
-            if(!response.ok) {
-                throw new Error("Error al consultar el producto");
-            };
-
-            let datos = await response.json();
-
-            //verificacion del prod 
-            if(datos.payload.length === 0){
-                throw new Error("Producto no encontrado");
-            };
-
-            let producto = datos.payload[0]; // Obtenemos el primer producto del array
-            mostrarProducto(producto);
-
-        } catch (error) {
-            console.log("Error al consultar el producto:", error);
-            getId_lista.innerHTML = `<p class="error">Error al consultar el producto. Por favor, intente nuevamente.</p>`;
-        }
-    });
-
-    function mostrarProducto(producto){
-        console.log("Producto encontrado:", producto);
-
-        let htmlProductos = `
-            <li class="producto-item">
-                <h3>${producto.nombre}</h3>
-                <p>Marca: ${producto.marca}</p>
-                <p>Precio: $${producto.precio}</p>
-                <p>Categoría: ${producto.categoria}</p>
-                <img src="${producto.imagen}" alt="${producto.nombre}" class="producto-imagen">
-                <button class="btn-delete" data-id="${producto.id}">Borrar</button>
-            </li>
-        `;
-
-        getId_lista.innerHTML = htmlProductos;
-
-        let deleteProducto_button = document.querySelector(".btn-delete");
-        let idProd = producto.id;
-
-        deleteProducto_button.addEventListener("click", function(e){
-            e.stopPropagation(); // Evita que el evento se propague al padre
-
-            let confirmacion = confirm(`¿Estás seguro de que deseas eliminar el producto con ID ${idProd}?`);
-            if(!confirmacion){
-                alert("Eliminación cancelada");
-            } else {
-                eliminarProducto(idProd);
-            };
-        });
-    }
-
-    async function eliminarProducto(idProd){
-        try {
-            let response = await fetch(`http://localhost:3000/api/productos/${idProd}`, {
-                method: "DELETE"
-            });
-
-            let result = await response.json();
-
-            if(response.ok){
-                alert(result.message);
-                getId_lista.innerHTML = ""; // Limpiamos la lista de productos consultados
-            } else {
-                console.error("Error al eliminar el producto:", result.message);
-                alert("Error al eliminar el producto. Por favor, intente nuevamente.");
-            }
-
-        } catch (error) {
-            console.error("Error al eliminar el producto:", error);
-            alert("Error al eliminar el producto. Por favor, intente nuevamente.");
-        }
-    } 
-
-
-</script>
+</div>
+<script src="/js/dashboard.js" type="module"></script>
 <%- include('partials/footer') %>

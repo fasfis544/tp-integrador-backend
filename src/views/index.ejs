@@ -1,24 +1,15 @@
-<%- include('partials/head') %> 
+<%- include('partials/head') %>
 <div class="wrapper">
     <%- include('partials/nav') %>
-    <main id="contenedor-get">
-        <div id="productos-container">
-            <ul id="productos-lista">
-                <%  products.forEach(prod => {%>
-                <!-- Aquí se mostrarán los productos -->
-                    <li class="producto-item">
-                        <img src="<%= prod.imagen %>" class="producto-imagen">
-                        <p>ID: <%= prod.id %></p>
-                        <h2><%= prod.nombre %></h2>
-                        <p>Precio: $<%= prod.precio %></p>
-                        <p>Marca: <%= prod.marca %></p>
-                        <p class="producto-categoria"> Categoria: <%= prod.categoria %></p>
-                        <p>Activo: <%= prod.activo ? "Sí" : "No" %></p>
-                    </li>
-                <% }) %>
-            </ul>
-        </div>
+    <main class="dashboard-main" id="contenido">
+        <div class="dashboard-heading"><div><span class="eyebrow">VISTA GENERAL</span><h1>Tu catálogo</h1><p>Gestioná los productos que acompañan cada movimiento.</p></div><a class="button button-primary" href="/dashboard/crear">+ Crear producto</a></div>
+        <section class="stats-grid" aria-label="Estadísticas del catálogo"><article><span>Total de productos</span><strong><%= products.length %></strong><small>En tu catálogo</small></article><article><span>Productos activos</span><strong><%= products.filter(product => product.activo).length %></strong><small>Visibles en la tienda</small></article><article><span>Categorías</span><strong><%= new Set(products.map(product => product.categoria)).size %></strong><small>Calzado · Indumentaria · Accesorios</small></article></section>
+        <section class="dashboard-card"><div class="card-heading"><h2>Listado de productos</h2><span class="muted"><%= products.length %> registros</span></div>
+            <% if (!products.length) { %><p class="status-message">Todavía no hay productos. Creá el primero para empezar.</p><% } else { %>
+            <div class="table-scroll"><table class="products-table"><thead><tr><th scope="col">Producto</th><th scope="col">Categoría</th><th scope="col">Precio</th><th scope="col">Estado</th><th scope="col">Acciones</th></tr></thead><tbody>
+            <% products.forEach(product => { %><tr><td><div class="table-product"><img src="<%= product.imagen %>" alt="<%= product.nombre %>" width="56" height="56"><div><strong><%= product.nombre %></strong><small>#<%= product.id %> · <%= product.marca %></small></div></div></td><td data-label="Categoría"><%= product.categoria %></td><td class="table-price" data-label="Precio"><%= new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(product.precio) %></td><td data-label="Estado"><span class="state-badge <%= product.activo ? 'active' : '' %>"><%= product.activo ? 'Activo' : 'Inactivo' %></span></td><td data-label="Acciones"><div class="table-actions"><a href="/dashboard/actualizar?id=<%= product.id %>" aria-label="Editar <%= product.nombre %>">Editar ↗</a><a href="/dashboard/eliminar?id=<%= product.id %>" class="danger-link" aria-label="Eliminar <%= product.nombre %>">Eliminar</a></div></td></tr><% }) %>
+            </tbody></table></div><% } %>
+        </section>
     </main>
 </div>
-<!--<script src="/js/app.js"></script> -->
 <%- include('partials/footer') %>

@@ -1,7 +1,7 @@
 import connection from '../database/db.js'; // Importamos la conexión a la base de datos
 
-export const selectAllProducts = async () => {
-    let sql = `SELECT * FROM productos WHERE activo = 1;`; // hacemos la consulta sql para mostrar los prod
+export const selectAllProducts = async (includeInactive = false) => {
+    let sql = `SELECT * FROM productos ${includeInactive ? '' : 'WHERE activo = 1'} ORDER BY id;`;
     return await connection.query(sql); // desestructuramos la consulta para obtener filas - llamada a base de datos
 };
 

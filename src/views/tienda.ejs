@@ -1,0 +1,22 @@
+<%- include('partials/site-head') %>
+<main id="contenido" class="store-page">
+    <section class="store-hero">
+        <div><span class="eyebrow">EL MOVIMIENTO ES TUYO</span><h1>Equipate para<br><span>ir más lejos.</span></h1><p>Encontrá lo que necesitás para tu próxima meta.</p></div>
+        <div class="hero-side"><span class="hero-number">SW / 01</span><p>Tu ritmo.<br>Tu estilo.<br><strong>Tu mejor versión.</strong></p><a href="#catalogo">Explorar colección ↓</a></div>
+    </section>
+    <div class="store-greeting"><p>Hola, <strong id="nombre-usuario">deportista</strong>. ¿Cuál es tu próximo desafío?</p><a class="cart-link" href="#carrito">Mi carrito <span id="acumulador-prods">0</span></a></div>
+    <section class="catalog-section" id="catalogo" aria-labelledby="catalogo-titulo">
+        <div class="section-heading"><div><span class="eyebrow">LA COLECCIÓN</span><h2 id="catalogo-titulo">Encontrá tu equipo</h2></div><label class="search-field"><span class="sr-only">Buscar productos</span><span aria-hidden="true">⌕</span><input type="search" class="barra-busqueda" placeholder="Buscar por nombre o marca…" maxlength="120"></label></div>
+        <div class="catalog-toolbar"><div class="lista-categorias" role="group" aria-label="Filtrar por categoría"><% ['Todos', 'Calzado', 'Indumentaria', 'Accesorios'].forEach((category, index) => { %><button class="btn-categoria <%= index === 0 ? 'selected' : '' %>" type="button" aria-pressed="<%= index === 0 %>" data-categoria="<%= category %>"><%= category %></button><% }) %></div><p class="result-count" aria-live="polite"></p></div>
+        <p id="catalogo-estado" class="status-message" role="status">Cargando productos…</p>
+        <div class="productos-container"></div>
+    </section>
+    <section class="cart-section" id="carrito" aria-labelledby="carrito-titulo">
+        <div class="section-heading"><div><span class="eyebrow">TUS ELEGIDOS</span><h2 id="carrito-titulo">Mi carrito</h2></div><button class="button button-quiet btn-vaciar" type="button" disabled>Vaciar carrito</button></div>
+        <div class="cart-layout"><div class="productos-carrito"></div><aside class="cart-summary"><h3>Resumen de tu compra</h3><div><span>Productos</span><span id="resumen-cantidad">0</span></div><div><span>Envío</span><span>A coordinar</span></div><div class="total-line"><strong>Total</strong><strong class="precio-total">$ 0</strong></div><button class="button button-primary btn-comprar" type="button" disabled>Simular compra →</button><p>Compra de demostración. No se realizan cobros ni se generan pedidos.</p></aside></div>
+        <p id="compra-estado" class="status-message" role="status" hidden></p>
+    </section>
+    <div class="toast" id="tienda-notificacion" role="status" hidden></div>
+</main>
+<script src="/js/tienda.js" type="module"></script>
+<%- include('partials/site-footer') %>

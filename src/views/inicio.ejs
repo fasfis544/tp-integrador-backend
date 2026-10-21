@@ -1,0 +1,31 @@
+<%- include('partials/site-head') %>
+<main id="contenido" class="landing">
+    <section class="welcome-hero">
+        <div class="welcome-copy">
+            <span class="eyebrow">SPORTSWEAR / EQUIPÁ TU PASIÓN</span>
+            <h1>Un nuevo día.<br>Tu próximo<br><span>movimiento.</span></h1>
+            <p>Calzado, indumentaria y accesorios para dar lo mejor de vos. Descubrí tu equipo ideal y seguí en movimiento.</p>
+            <div class="hero-tags"><span>01 / Calzado</span><span>02 / Indumentaria</span><span>03 / Accesorios</span></div>
+        </div>
+        <div class="welcome-panel">
+            <div class="logo-panel"><img src="/assets/brand/logo.png" alt="Logo original SportsWear" width="240" height="135"></div>
+            <span class="eyebrow">BIENVENIDO A SPORTSWEAR</span>
+            <h2>¿Cómo te llamás?</h2>
+            <p>Personalizá tu visita y empezá a explorar.</p>
+            <form id="formLogin">
+                <label for="usuario">Tu nombre</label>
+                <input type="text" id="usuario" name="usuario" placeholder="Por ejemplo, Alex" maxlength="60" autocomplete="given-name" required>
+                <button class="button button-primary" type="submit" id="autoservicio">Entrar a la tienda <span aria-hidden="true">↗</span></button>
+            </form>
+            <a class="admin-entry" href="/dashboard" id="administrador">Acceder al panel de administración →</a>
+            <small class="demo-note">Demo académica: el nombre no es una cuenta ni una contraseña.</small>
+        </div>
+    </section>
+    <section class="benefits" aria-label="Características de la tienda">
+        <article><span>01</span><div><h3>Todo tu equipo, un lugar</h3><p>Tres categorías para acompañar tu rutina.</p></div></article>
+        <article><span>02</span><div><h3>Un carrito que te sigue</h3><p>Tus productos se guardan en este navegador.</p></div></article>
+        <article><span>03</span><div><h3>Una experiencia a tu medida</h3><p>Explorá desde tu celular y elegí modo claro u oscuro.</p></div></article>
+    </section>
+</main>
+<script src="/js/inicio.js" defer></script>
+<%- include('partials/site-footer') %>

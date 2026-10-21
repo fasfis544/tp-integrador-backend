@@ -62,7 +62,7 @@ export const createProduct = async (req, res) => {
         console.log(error);
         res.status(500).json({
             message: "Error al crear el producto",
-            error: error.message
+            error: 'No se pudo guardar el producto'
         });
     }
 };

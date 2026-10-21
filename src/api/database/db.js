@@ -10,7 +10,11 @@ const connection = mysql.createPool({
     database: database.name,
     user: database.user,
     password: database.password,
-    port: 3307 // puerto por defecto de MySQL
+    port: database.port,
+    waitForConnections: true,
+    connectionLimit: 10,
+    decimalNumbers: true,
+    connectTimeout: 5000
 });
 
 export default connection; // exportamos la conexion para usarla en otros archivos

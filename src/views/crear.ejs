@@ -1,87 +1,11 @@
-<%- include('partials/head') %> 
+<%- include('partials/head') %>
 <div class="wrapper">
     <%- include('partials/nav') %>
-    <main id="contenedor-get">
-            <div id="productos-container">
-                <h2><%= tittle %></h2>
-                <form autocomplete="off" id="altaProductos_form">
-                    <label for="nombreProd">Nombre</label>
-                    <input type="text" name="nombre" id="nombreProd" required>
-
-                    <label for="marcaProd">Marca</label>
-                    <input type="text" name="marca" id="marcaProd" required>
-
-                    <label for="precioProd">Precio</label>
-                    <input type="number" name="precio" id="precioProd" required>
-
-                    <label for="categoriaProd">Categoria</label>
-                    <select name="categoria" id="categoriaProd" required>
-                        <option value="Calzado">Calzado</option>
-                        <option value="Indumentaria">Indumentaria</option>
-                        <option value="Accesorios">Accesorios</option>
-                    </select>
-
-                    <label for="activoProd">Activo</label>
-                    <select name="activo" id="activoProd" required>
-                        <option value="1">Sí</option>
-                        <option value="0">No</option>
-                    </select>
-
-                    <label for="imagenProd">Imagen</label>
-                    <input type="text" name="imagen" id="imagenProd" required>
-
-                    <input type="submit" value="Crear Producto">
-
-                </form>
-            </div>
-            <div id="producto-detalle-container">
-                <ul id="producto-detalle"></ul>
-            </div>
-        </main>
-    </div>
-
-    <script>
-        let altaProductos_form = document.getElementById("altaProductos_form");
-        const url = "http://localhost:3000/api";
-
-        altaProductos_form.addEventListener("submit", async ( e ) => {
-            e.preventDefault();
-
-            let formData = new FormData(e.target);
-
-            let data = Object.fromEntries(formData.entries());
-
-            if(!data.nombre || !data.marca || !data.precio || !data.imagen) {
-                alert("Por favor, completa todos los campos.");
-                return;
-            };
-
-            try { 
-                let response = await fetch(`${url}/productos`,
-                    {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify(data)
-                    });
-
-                    if(response.ok) {
-                        console.log(response);
-                        let result = await response.json();
-                        console.log(result);
-                        alert("Producto creado exitosamente.");
-                    } else {
-                        let error = await response.json();
-                        console.log("Error:", error.message);
-                    }
-
-            } catch (error) {
-                console.error("Error al crear el producto:", error);
-                alert("Error al crear el producto. Por favor, intenta nuevamente.");
-            }
-
-        });
-
-    </script>
+    <main class="dashboard-main" id="contenido" data-action="crear">
+        <div class="dashboard-heading"><div><span class="eyebrow">GESTIÓN DEL CATÁLOGO / ALTA</span><h1>Crear producto</h1><p>Sumá una nueva opción para el próximo desafío.</p></div><a href="/dashboard" class="text-link">← Volver al catálogo</a></div>
+        <section class="dashboard-card form-card"><div class="card-heading"><h2>Información del producto</h2><span class="muted">Todos los campos son obligatorios</span></div><form id="producto-form"><%- include('partials/product-fields') %><div class="form-actions"><button class="button button-primary" type="submit">Crear producto →</button><a href="/dashboard">Cancelar</a></div></form></section>
+        <p id="form-estado" class="status-message" role="status" hidden></p>
+    </main>
+</div>
+<script src="/js/dashboard.js" type="module"></script>
 <%- include('partials/footer') %>

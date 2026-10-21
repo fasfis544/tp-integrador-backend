@@ -1,22 +1,30 @@
 {
-  "name": "src",
+  "name": "sportswear-fullstack",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js"
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "db:setup": "node scripts/setup-database.js",
+    "test": "playwright test",
+    "test:report": "playwright show-report",
+    "screenshots": "playwright test --config=playwright.screenshots.config.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
-  "description": "",
+  "description": "Tienda deportiva y panel de administración con Node.js, Express, EJS y MySQL.",
+  "engines": {
+    "node": ">=22"
+  },
   "dependencies": {
-    "cors": "^2.8.5",
     "dotenv": "^17.1.0",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
-    "mysql2": "^3.14.1",
-    "nodemon": "^3.1.10"
+    "mysql2": "^3.14.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1"
   }
 }

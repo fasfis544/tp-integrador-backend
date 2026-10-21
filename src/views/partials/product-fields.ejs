@@ -1,0 +1,8 @@
+<div class="form-grid">
+    <div class="field"><label for="nombreProd">Nombre</label><input type="text" name="nombre" id="nombreProd" maxlength="120" placeholder="Ej. Zapatillas Running" required></div>
+    <div class="field"><label for="marcaProd">Marca</label><input type="text" name="marca" id="marcaProd" maxlength="80" placeholder="Ej. SportsWear" required></div>
+    <div class="field"><label for="precioProd">Precio (ARS)</label><input type="number" name="precio" id="precioProd" min="0.01" max="99999999.99" step="0.01" placeholder="0,00" required></div>
+    <div class="field"><label for="categoriaProd">Categoría</label><select name="categoria" id="categoriaProd" required><option value="Calzado">Calzado</option><option value="Indumentaria">Indumentaria</option><option value="Accesorios">Accesorios</option></select></div>
+    <div class="field"><label for="activoProd">Estado</label><select name="activo" id="activoProd" required><option value="1">Activo · visible en la tienda</option><option value="0">Inactivo · oculto en la tienda</option></select></div>
+    <div class="field"><label for="imagenProd">Imagen</label><input type="text" name="imagen" id="imagenProd" maxlength="2048" placeholder="https://… o /assets/products/running.jpg" required><small>URL HTTP(S) o ruta local. Máximo 2048 caracteres.</small></div>
+</div>

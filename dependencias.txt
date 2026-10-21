@@ -1,6 +1,11 @@
-cors,
-dotenv,
-ejs,
-express,
-mysql2,
-nodemon
+Dependencias de ejecución (versiones exactas en package-lock.json):
+- dotenv
+- ejs
+- express
+- mysql2
+
+Dependencias de desarrollo:
+- @playwright/test
+
+Node.js >= 22. El modo desarrollo usa node --watch.
+Instalación reproducible: npm ci
